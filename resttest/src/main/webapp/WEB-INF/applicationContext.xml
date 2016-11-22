@@ -12,19 +12,7 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         ">
-    <import resource="classpath:META-INF/spring/datasource-jpa-context.xml"/>
- 	<mvc:annotation-driven>
- 		<mvc:message-converters>
- 			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
- 			<bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
- 				<property name="marshaller" ref="castorMarshaller"/>
- 				<property name="unmarshaller" ref="castorMarshaller"/>
- 			</bean>
- 		</mvc:message-converters>
- 	</mvc:annotation-driven>
-    <context:component-scan base-package="com.lvg.resttest" />
-    <bean id="castorMarshaller" class="org.springframework.oxm.castor.CastorMarshaller">
-    	<property name="mappingLocation" value="classpath:META-INF/castor/oxm-mapping.xml"/>
-    </bean>
+   
+ 	<import resource="/spring/rest-context.xml"/>
 
 </beans>

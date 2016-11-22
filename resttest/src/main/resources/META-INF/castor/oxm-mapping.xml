@@ -2,7 +2,7 @@
 <mapping>
 	<class name="com.lvg.resttest.models.Contacts">
 		<field name="contacts" type="com.lvg.resttest.models.Contact"
-				collection="arrayList">
+				collection="arraylist">
 			<bind-xml name="contact"/>
 		</field>
 	</class>
