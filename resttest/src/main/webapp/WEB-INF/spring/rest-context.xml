@@ -12,8 +12,7 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         ">
-    <import resource="classpath:META-INF/spring/datasource-jpa-context.xml"/>
- 	<mvc:annotation-driven>
+    <mvc:annotation-driven>
  		<mvc:message-converters>
  			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
  			<bean class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">

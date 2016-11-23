@@ -26,6 +26,6 @@
 		</field>
 	</class>
 	<field-handler name="dateHandler" class="com.lvg.resttest.handlers.DateTimeFieldHandler">
-		<param name="date-format" value="yyyy-mm-dd"/>
+		<param name="date-format" value="yyyy-MM-dd"/>
 	</field-handler>
 </mapping>

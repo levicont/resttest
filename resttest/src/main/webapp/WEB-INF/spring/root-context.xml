@@ -12,7 +12,10 @@
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd
         ">
-   
- 	<import resource="/spring/rest-context.xml"/>
+    
+    <import resource="classpath:META-INF/spring/datasource-jpa-context.xml"/>
+ 	<import resource="rest-context.xml"/>
+ 	<import resource="web-security.xml"/>
+ 	
 
 </beans>
