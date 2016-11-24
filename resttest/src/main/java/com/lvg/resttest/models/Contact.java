@@ -8,10 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
+import org.springframework.validation.annotation.Validated;
 
 @Entity
 @Table(name="contact")
@@ -37,7 +40,7 @@ public class Contact implements Serializable {
     }
 
     @Version
-    @Column(name = "VERSION")
+    @Column(name = "VERSION")    
     public int getVersion() {
         return version;
     }
@@ -46,6 +49,7 @@ public class Contact implements Serializable {
         this.version = version;
     }
 
+    @NotNull
     @Column(name = "FIRST_NAME")
     public String getFirstName() {
         return firstName;
@@ -55,6 +59,7 @@ public class Contact implements Serializable {
         this.firstName = firstName;
     }
 
+    @NotNull
     @Column(name = "LAST_NAME")
     public String getLastName() {
         return lastName;

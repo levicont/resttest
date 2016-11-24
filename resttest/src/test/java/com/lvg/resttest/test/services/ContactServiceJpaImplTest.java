@@ -1,9 +1,13 @@
 package com.lvg.resttest.test.services;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import java.util.List;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertEquals;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.validation.ConstraintViolationException;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,6 +35,9 @@ public class ContactServiceJpaImplTest extends
 	@Autowired
 	ContactService contactService;
 	
+	@PersistenceContext
+	EntityManager em;
+	
 	@DataSet(setUpDataSet="/com/lvg/resttest/test/services/ContactServiceJpaImplTest.xls")
 	@Test
 	public void testFindAll(){
@@ -38,5 +45,47 @@ public class ContactServiceJpaImplTest extends
 		assertNotNull(contacts);
 		assertEquals(2, contacts.size());
 	}
+	
+	@DataSet(setUpDataSet="/com/lvg/resttest/test/services/ContactServiceJpaImplTest.xls")
+	@Test
+	public void testFindByFirstName_1()throws Exception{
+		List<Contact> contacts = contactService.findByFirstName("Tomas");
+		assertNotNull(contacts);
+		assertEquals(1, contacts.size());
+	}
+	
+	@DataSet(setUpDataSet="/com/lvg/resttest/test/services/ContactServiceJpaImplTest.xls")
+	@Test
+	public void testFindByFirstName_2()throws Exception{
+		List<Contact> contacts = contactService.findByFirstName("Eric");
+		assertEquals(0, contacts.size());
+		assertNotNull(contacts);
+		
+	}
+	
+	@Test
+	public void testAddContact()throws Exception{
+		deleteFromTables("CONTACT");
+		Contact contact = new Contact();
+		contact.setFirstName("Jack");
+		contact.setLastName("Daniels");
+		contactService.save(contact);
+		em.flush();
+		List<Contact> contacts = contactService.findAll();
+		assertNotNull(contacts);
+		assertEquals(1, contacts.size());
+	}
+	
+	@Test(expected=ConstraintViolationException.class)
+	public void testAddContactWithJSR349Error(){
+		deleteFromTables("CONTACT");
+		Contact contact = new Contact();
+		contactService.save(contact);
+		em.flush();
+		List<Contact> contacts = contactService.findAll();		
+		assertEquals(0, contacts.size());
+	}
+	
+	
 	
 }
